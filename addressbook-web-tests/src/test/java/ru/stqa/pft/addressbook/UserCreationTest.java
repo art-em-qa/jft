@@ -9,7 +9,7 @@ public class UserCreationTest {
   private WebDriver wd;
 
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     System.setProperty("webdriver.chrome.driver", "/usr/local/bin");
     wd = new ChromeDriver();
@@ -59,7 +59,7 @@ public class UserCreationTest {
     wd.findElement(By.linkText("add new")).click();
   }
 
-  @AfterClass(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     logout();
     wd.quit();
