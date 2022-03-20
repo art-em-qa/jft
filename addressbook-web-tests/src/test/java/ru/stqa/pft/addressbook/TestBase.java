@@ -1,17 +1,17 @@
 package ru.stqa.pft.addressbook;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
+
 public class TestBase {
     protected WebDriver wd;
+    protected boolean acceptNextAlert = true;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
@@ -20,6 +20,7 @@ public class TestBase {
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook");
         login("admin", "secret");
+        acceptNextAlert = true;
     }
 
     private void login(String username, String password) {
@@ -56,7 +57,7 @@ public class TestBase {
     }
 
     protected void returnHomePage() {
-      wd.findElement(By.linkText("home page")).click();
+      wd.findElement(By.linkText("home")).click();
     }
 
     protected void submitCreateNewUser() {
@@ -113,6 +114,33 @@ public class TestBase {
     }
 
     protected void selectGroup() {
+      wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected String closeAlertAndGetItsText() {
+      try {
+        Alert alert = wd.switchTo().alert();
+        String alertText = alert.getText();
+        if (acceptNextAlert) {
+          alert.accept();
+        } else {
+          alert.dismiss();
+        }
+        return alertText;
+      } finally {
+        acceptNextAlert = true;
+      }
+    }
+
+    protected void confirmDeleteUsers() {
+      assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    protected void deleteSelectedUsers() {
+      wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    protected void selectUser() {
       wd.findElement(By.name("selected[]")).click();
     }
 }
