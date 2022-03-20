@@ -7,9 +7,9 @@ public class UserDeleteTest extends TestBase{
 
   @Test
   public void testUserDelete() throws Exception {
-    app.selectUser();
-    app.deleteSelectedUsers();
-    app.confirmDeleteUsers();
-    app.returnHomePage();
+    app.getNavigationHelper().selectRandomCheckBox();
+    app.getContactHelper().deleteSelectedUsers();
+    app.getContactHelper().confirmDeleteUsers();
+    app.getNavigationHelper().returnHomePage();
   }
 }

@@ -9,11 +9,11 @@ public class GroupCreationTest extends TestBase{
 
     @Test
     public void testGroupCreation() throws Exception {
-        app.openGroupPage();
-        app.initCreateNewGroup();
-        app.fillGropForm(new GroupData("peopleTest", "humanTest", "testGroup"));
-        app.submitCreateNewGroup();
-        app.returnGroupPage();
+        app.getNavigationHelper().openGroupPage();
+        app.getGroupHelper().initCreateNewGroup();
+        app.getGroupHelper().fillGropForm(new GroupData("peopleTest", "humanTest", "testGroup"));
+        app.getGroupHelper().submitCreateNewGroup();
+        app.getGroupHelper().returnGroupPage();
     }
 
 }
