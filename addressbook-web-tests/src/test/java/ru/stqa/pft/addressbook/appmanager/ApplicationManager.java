@@ -22,7 +22,6 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
-        NavigationHelper.acceptNextAlert = true;
     }
 
     public void stop() {
