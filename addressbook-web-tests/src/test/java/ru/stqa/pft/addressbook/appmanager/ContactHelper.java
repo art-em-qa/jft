@@ -7,33 +7,27 @@ import ru.stqa.pft.addressbook.model.UserData;
 
 import static org.testng.Assert.assertTrue;
 
-public class ContactHelper {
-    private WebDriver wd;
+public class ContactHelper extends HelperBase{
     private boolean acceptNextAlert = true;
 
     public ContactHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void submitCreateNewUser() {
-      wd.findElement(By.name("submit")).click();
+      click(By.name("submit"));
     }
 
     public void fillFormNewUser(UserData userData) {
-      wd.findElement(By.name("firstname")).clear();
-      wd.findElement(By.name("firstname")).sendKeys(userData.getFirstname());
-      wd.findElement(By.name("lastname")).clear();
-      wd.findElement(By.name("lastname")).sendKeys(userData.getLastname());
-      wd.findElement(By.name("address")).clear();
-      wd.findElement(By.name("address")).sendKeys(userData.getAddress());
-      wd.findElement(By.name("work")).clear();
-      wd.findElement(By.name("work")).sendKeys(userData.getWorkphone());
-      wd.findElement(By.name("email")).clear();
-      wd.findElement(By.name("email")).sendKeys(userData.getEmail());
+        type(By.name("firstname"), userData.getFirstname());
+        type(By.name("lastname"),userData.getLastname());
+        type(By.name("address"), userData.getAddress());
+        type(By.name("work"), userData.getWorkphone());
+        type(By.name("email"), userData.getEmail());
     }
 
     public void initCreateNewUser() {
-      wd.findElement(By.linkText("add new")).click();
+      click(By.linkText("add new"));
     }
 
     private String closeAlertAndGetItsText() {
@@ -56,6 +50,6 @@ public class ContactHelper {
     }
 
     public void deleteSelectedUsers() {
-      wd.findElement(By.xpath("//input[@value='Delete']")).click();
+      click(By.xpath("//input[@value='Delete']"));
     }
 }
