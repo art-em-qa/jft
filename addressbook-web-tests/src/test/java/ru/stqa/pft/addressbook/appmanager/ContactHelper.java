@@ -32,7 +32,12 @@ public class ContactHelper extends HelperBase{
       click(By.xpath("//input[@value='Delete']"));
     }
 
-    public void confirmDeleteUsers() {
-        wd.switchTo().alert().accept();
+
+    public void initUserModifications() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitUserModifications() {
+        click(By.name("update"));
     }
 }

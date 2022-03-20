@@ -20,4 +20,8 @@ public class NavigationHelper extends HelperBase{
     public void selectRandomCheckBox() {
       click(By.name("selected[]"));
     }
+
+    public void acceptAllert() {
+        wd.switchTo().alert().accept();
+    }
 }

@@ -9,7 +9,7 @@ public class UserDeleteTest extends TestBase{
   public void testUserDelete() throws Exception {
     app.getNavigationHelper().selectRandomCheckBox();
     app.getContactHelper().deleteSelectedUsers();
-    app.getContactHelper().confirmDeleteUsers();
+    app.getNavigationHelper().acceptAllert();
     app.getNavigationHelper().returnHomePage();
   }
 }
