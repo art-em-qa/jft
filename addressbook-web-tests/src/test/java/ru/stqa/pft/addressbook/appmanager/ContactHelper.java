@@ -4,7 +4,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.stqa.pft.addressbook.model.UserData;
-
 import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase{
@@ -30,23 +29,8 @@ public class ContactHelper extends HelperBase{
       click(By.linkText("add new"));
     }
 
-    private String closeAlertAndGetItsText() {
-      try {
-        Alert alert = wd.switchTo().alert();
-        String alertText = alert.getText();
-        if (acceptNextAlert) {
-          alert.accept();
-        } else {
-          alert.dismiss();
-        }
-        return alertText;
-      } finally {
-        acceptNextAlert = true;
-      }
-    }
-
     public void confirmDeleteUsers() {
-      assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+      assertTrue(NavigationHelper.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
 
     public void deleteSelectedUsers() {

@@ -11,7 +11,6 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
-    public boolean acceptNextAlert = true;
 
     public void init() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin");
@@ -23,22 +22,7 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
-        acceptNextAlert = true;
-    }
-
-    public String closeAlertAndGetItsText() {
-        try {
-            Alert alert = wd.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
+        NavigationHelper.acceptNextAlert = true;
     }
 
     public void stop() {
