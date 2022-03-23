@@ -2,6 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,10 +13,20 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
+    private String browser;
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
     public void init() {
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin");
-        wd = new ChromeDriver();
+        if (browser.equals(BrowserType.CHROME)){
+            System.setProperty("webdriver.chrome.driver", "/users/artemembulaev/scripts/chromedriver");
+            wd = new ChromeDriver();
+        } else if (browser.equals(BrowserType.FIREFOX)) {
+            System.setProperty("webdriver.gecko.driver", "/users/artemembulaev/scripts/geckodriver");
+            wd = new FirefoxDriver();
+        }
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook");
         groupHelper = new GroupHelper(wd);
