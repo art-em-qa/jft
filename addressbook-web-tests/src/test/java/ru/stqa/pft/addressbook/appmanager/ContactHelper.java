@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
 import static org.testng.Assert.assertTrue;
 
@@ -16,12 +18,17 @@ public class ContactHelper extends HelperBase{
       click(By.name("submit"));
     }
 
-    public void fillFormNewUser(UserData userData) {
+    public void fillFormNewUser(UserData userData, boolean creation) {
         type(By.name("firstname"), userData.getFirstname());
         type(By.name("lastname"),userData.getLastname());
         type(By.name("address"), userData.getAddress());
         type(By.name("work"), userData.getWorkphone());
         type(By.name("email"), userData.getEmail());
+        if (creation){
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void initCreateNewUser() {

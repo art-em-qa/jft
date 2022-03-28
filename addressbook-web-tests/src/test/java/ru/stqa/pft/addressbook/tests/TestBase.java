@@ -10,7 +10,7 @@ import static org.testng.Assert.assertTrue;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
