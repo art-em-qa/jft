@@ -6,25 +6,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.UserData;
+
 import static org.testng.Assert.assertTrue;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
 
     public void submitCreateNewUser() {
-      click(By.name("submit"));
+        click(By.name("submit"));
     }
 
     public void fillFormNewUser(UserData userData, boolean creation) {
         type(By.name("firstname"), userData.getFirstname());
-        type(By.name("lastname"),userData.getLastname());
+        type(By.name("lastname"), userData.getLastname());
         type(By.name("address"), userData.getAddress());
         type(By.name("work"), userData.getWorkphone());
         type(By.name("email"), userData.getEmail());
-        if (creation){
+        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -32,11 +33,11 @@ public class ContactHelper extends HelperBase{
     }
 
     public void initCreateNewUser() {
-      click(By.linkText("add new"));
+        click(By.linkText("add new"));
     }
 
     public void deleteSelectedUsers() {
-      click(By.xpath("//input[@value='Delete']"));
+        click(By.xpath("//input[@value='Delete']"));
     }
 
 
@@ -46,5 +47,20 @@ public class ContactHelper extends HelperBase{
 
     public void submitUserModifications() {
         click(By.name("update"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact(UserData user, boolean creation) {
+        initCreateNewUser();
+        fillFormNewUser(user, creation);
+        submitCreateNewUser();
+        stopCreateAndOpenHomePage();
+    }
+
+    private void stopCreateAndOpenHomePage() {
+        click(By.linkText("home page"));
     }
 }
