@@ -53,9 +53,9 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContact(UserData user, boolean creation) {
+    public void createContact(UserData contact) {
         initCreateNewUser();
-        fillFormNewUser(user, creation);
+        fillFormNewUser(contact, true);
         submitCreateNewUser();
         stopCreateAndOpenHomePage();
     }

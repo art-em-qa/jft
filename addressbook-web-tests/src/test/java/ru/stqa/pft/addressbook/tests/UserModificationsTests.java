@@ -10,7 +10,7 @@ public class UserModificationsTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new UserData("Antonio", "Fagundes",
                     "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-                    "peopleTest"), true);
+                    "peopleTest"));
         }
         app.getContactHelper().initUserModifications();
         app.getContactHelper().fillFormNewUser(new UserData("Antonio-Maria", "Fagundes",
