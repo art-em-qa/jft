@@ -8,14 +8,13 @@ public class UserCreationTest extends TestBase{
 
   @Test
   public void testUserCreation() throws Exception {
+    String groupName = "gruppa";
     app.getContactHelper().initCreateNewUser();
-    if(! app.getContactHelper().isGroupCreated(2)){
-      app.getNavigationHelper().openGroupPage();
-      app.getGroupHelper().createGroup(new GroupData("peopleTest", "humanTest", "testGroup"));
-      app.getNavigationHelper().returnHomePage();
+    if(! app.getContactHelper().isGroupCreatedByName(groupName)){
+      app.getGroupHelper().createGroup(new GroupData(groupName, "humanTest", "testGroup"));
     }
     app.getContactHelper().createContact(new UserData("Antonio", "Fagundes",
             "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-            "peopleTest"));
+            groupName));
   }
 }

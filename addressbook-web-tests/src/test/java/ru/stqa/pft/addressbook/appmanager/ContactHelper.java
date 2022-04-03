@@ -26,9 +26,18 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), userData.getWorkphone());
         type(By.name("email"), userData.getEmail());
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
+            isGroupCreatedByName(userData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+    }
+
+    public boolean isGroupCreatedByName(String groupName) {
+        try{
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupName);
+            return true;
+        } catch (NoSuchElementException e){
+            return false;
         }
     }
 
@@ -64,12 +73,20 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home page"));
     }
 
-    public boolean isGroupCreated(int index) {
+    public boolean isGroupCreatedByIndex(int index) {
         try {
             new Select (wd.findElement(By.name("new_group"))).selectByIndex(index);
             return true;
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    public void modificateContact(UserData contact) {
+        initUserModifications();
+        fillFormNewUser(new UserData("Antonio-Maria", "Fagundes",
+                "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
+                null), false);
+        submitUserModifications();
     }
 }

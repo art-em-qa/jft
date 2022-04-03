@@ -9,16 +9,15 @@ public class UserDeleteTest extends TestBase{
 
   @Test
   public void testUserDelete() throws Exception {
+    String groupName = "actors";
     if(! app.getContactHelper().isThereAContact()){
       app.getContactHelper().initCreateNewUser();
-      if(! app.getContactHelper().isGroupCreated(1)){
-        app.getNavigationHelper().openGroupPage();
-        app.getGroupHelper().createGroup(new GroupData("peopleTest", "humanTest", "testGroup"));
-        app.getNavigationHelper().returnHomePage();
+      if(! app.getContactHelper().isGroupCreatedByName(groupName)){
+        app.getGroupHelper().createGroup(new GroupData(groupName, null, null));
       }
       app.getContactHelper().createContact(new UserData("Antonio", "Fagundes",
               "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-              "peopleTest"));
+              groupName));
     }
     app.getNavigationHelper().selectRandomCheckBox();
     app.getContactHelper().deleteSelectedUsers();
