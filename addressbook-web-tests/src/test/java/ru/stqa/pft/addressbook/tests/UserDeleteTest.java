@@ -19,7 +19,7 @@ public class UserDeleteTest extends TestBase{
               "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
               groupName));
     }
-    app.getNavigationHelper().selectRandomCheckBox();
+    app.getNavigationHelper().selectCheckBox(0);
     app.getContactHelper().deleteSelectedUsers();
     app.getNavigationHelper().acceptAllert();
     app.getNavigationHelper().returnHomePage();

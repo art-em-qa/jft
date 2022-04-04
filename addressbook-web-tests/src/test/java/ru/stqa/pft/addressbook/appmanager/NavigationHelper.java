@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -24,8 +23,8 @@ public class NavigationHelper extends HelperBase{
       click(By.linkText("home"));
     }
 
-    public void selectRandomCheckBox() {
-      click(By.name("selected[]"));
+    public void selectCheckBox(int index) {
+      wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void acceptAllert() {
