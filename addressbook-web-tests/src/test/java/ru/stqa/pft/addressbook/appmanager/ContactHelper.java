@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.UserData;
 
 import static org.testng.Assert.assertTrue;
@@ -60,6 +61,17 @@ public class ContactHelper extends HelperBase {
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContactAndGroupIfGroupNotExist(UserData contact, String groupName) {
+        initCreateNewUser();
+        if(! isGroupCreatedByName(groupName)){
+            new GroupHelper(wd).createGroup(new GroupData(groupName, null, null));
+            initCreateNewUser();
+        }
+        fillFormNewUser(contact, true);
+        submitCreateNewUser();
+        stopCreateAndOpenHomePage();
     }
 
     public void createContact(UserData contact) {
