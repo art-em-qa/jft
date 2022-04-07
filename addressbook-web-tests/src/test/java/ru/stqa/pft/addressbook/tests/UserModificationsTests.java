@@ -10,7 +10,7 @@ public class UserModificationsTests extends TestBase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContactAndGroupIfGroupNotExist(new UserData("Antonio", "Fagundes",
                     "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-                    "artist"), "artist");
+                    "artist"));
         }
         app.getContactHelper().modificateContact(new UserData("Antonio-Maria", "Fagundes",
                 "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",

@@ -63,10 +63,10 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContactAndGroupIfGroupNotExist(UserData contact, String groupName) {
+    public void createContactAndGroupIfGroupNotExist(UserData contact) {
         initCreateNewUser();
-        if(! isGroupCreatedByName(groupName)){
-            new GroupHelper(wd).createGroup(new GroupData(groupName, null, null));
+        if(! isGroupCreatedByName(contact.getGroup())){
+            new GroupHelper(wd).createGroup(new GroupData(contact.getGroup(), null, null));
             initCreateNewUser();
         }
         fillFormNewUser(contact, true);

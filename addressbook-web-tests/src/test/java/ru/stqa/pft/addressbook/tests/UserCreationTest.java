@@ -9,6 +9,6 @@ public class UserCreationTest extends TestBase{
   public void testUserCreation() throws Exception {
     app.getContactHelper().createContactAndGroupIfGroupNotExist(new UserData("Antonio", "Fagundes",
             "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-            "actor"), "actor");
+            "actor"));
   }
 }
