@@ -15,11 +15,14 @@ public class GroupDeleteTest extends TestBase{
     if(! app.getGroupHelper().isThereAGroup()){
       app.getGroupHelper().createGroup(new GroupData("peopleTest", "humanTest", "testGroup"));
     }
-    List<GroupData> before = app.getGroupHelper().getGroupLis();
+    List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getNavigationHelper().selectCheckBox(before.size() -1);
     app.getGroupHelper().deleteSelectedGroup();
     app.getGroupHelper().returnGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupLis();
+    List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() -1);
+
+    before.remove(before.size() -1);
+      Assert.assertEquals(before, after);
   }
 }
