@@ -3,10 +3,14 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -100,5 +104,21 @@ public class ContactHelper extends HelperBase {
                 "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
                 null), false);
         submitUserModifications();
+    }
+
+    public List<UserData> getContactList() {
+        List<UserData> contacts = new ArrayList<UserData>();
+        List<WebElement> elements = wd.findElements(By.xpath("//*[@id='maintable']/tbody/tr[@name = 'entry']"));
+        for (WebElement element : elements) {
+            String firstname = element.findElement(By.xpath("td[3]")).getText();
+            String lastname = element.findElement(By.xpath("td[2]")).getText();
+            String address = element.findElement(By.xpath("td[4]")).getText();
+            String emails = element.findElement(By.xpath("td[5]")).getText();
+            String phones = element.findElement(By.xpath("td[6]")).getText();
+            int id = Integer.parseInt(element.findElement(By.xpath("//td/input")).getAttribute("value"));
+            UserData contact = new UserData(id,firstname, lastname, address, phones, emails);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
