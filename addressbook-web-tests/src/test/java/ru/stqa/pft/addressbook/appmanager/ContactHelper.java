@@ -55,8 +55,8 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void initUserModifications() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void initUserModificationsById(int id) {
+        click(By.cssSelector("a[href='edit.php?id="+ id + "']"));
     }
 
     public void submitUserModifications() {
@@ -99,10 +99,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void modificateContact(UserData contact) {
-        initUserModifications();
-        fillFormNewUser(new UserData("Antonio-Maria", "Fagundes",
-                "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-                null), false);
+        initUserModificationsById(contact.getId());
+        fillFormNewUser(contact, false);
         submitUserModifications();
     }
 
