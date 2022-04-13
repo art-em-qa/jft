@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDeleteTest extends TestBase{
 
-  @Test
+  @Test(enabled = false)
   public void testUserDelete() throws Exception {
     if(! app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContactAndGroupIfGroupNotExist(new UserData("Antonio", "Fagundes",
@@ -17,10 +17,10 @@ public class UserDeleteTest extends TestBase{
               "actor"));
     }
     List<UserData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().selectCheckBox(before.size() -1);
+    app.goTo().selectCheckBox(before.size() -1);
     app.getContactHelper().deleteSelectedUsers();
-    app.getNavigationHelper().acceptAllert();
-    app.getNavigationHelper().returnHomePage();
+    app.goTo().acceptAllert();
+    app.goTo().returnHomePage();
     List<UserData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() -1);
 

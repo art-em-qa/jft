@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserModificationsTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testUserModifications() {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContactAndGroupIfGroupNotExist(new UserData("Antonio", "Fagundes",
@@ -20,7 +20,7 @@ public class UserModificationsTests extends TestBase {
         UserData modContact = new UserData(before.get(before.size()-1).getId(), "Antonio-Maria", "Fagundes",
                 "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com");
         app.getContactHelper().modificateContact(modContact);
-        app.getNavigationHelper().returnHomePage();
+        app.goTo().returnHomePage();
         List<UserData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 

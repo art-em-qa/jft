@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserCreationTest extends TestBase{
 
-  @Test
+  @Test(enabled = false)
   public void testUserCreation() throws Exception {
     List<UserData> before = app.getContactHelper().getContactList();
     UserData contact = new UserData("Antonio", "Fagundes",

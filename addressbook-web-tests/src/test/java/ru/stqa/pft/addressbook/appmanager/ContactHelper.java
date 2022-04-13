@@ -70,7 +70,7 @@ public class ContactHelper extends HelperBase {
     public void createContactAndGroupIfGroupNotExist(UserData contact) {
         initCreateNewUser();
         if(! isGroupCreatedByName(contact.getGroup())){
-            new GroupHelper(wd).createGroup(new GroupData(contact.getGroup(), null, null));
+            new GroupHelper(wd).create(new GroupData(contact.getGroup(), null, null));
             initCreateNewUser();
         }
         fillFormNewUser(contact, true);
