@@ -4,9 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase{
 
@@ -56,8 +59,8 @@ public class GroupHelper extends HelperBase{
         returnGroupPage();
     }
 
-    public void modify(int index, GroupData group) {
-        new NavigationHelper(wd).selectCheckBox(index);
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
         initGroupModification();
         fillGropForm(group);
         submitGroupModifications();
@@ -68,6 +71,16 @@ public class GroupHelper extends HelperBase{
         new NavigationHelper(wd).selectCheckBox(index);
         deleteSelectedGroup();
         returnGroupPage();
+    }
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        deleteSelectedGroup();
+        returnGroupPage();
+    }
+
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" +id + "']")).click();
     }
 
     public boolean isThereAGroup() {
@@ -84,8 +97,18 @@ public class GroupHelper extends HelperBase{
         for(WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groups.add(new GroupData().withId(id).withName(name));
+        }
+        return groups;
+    }
+
+    public Groups all() {
+        Groups groups = new Groups();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for(WebElement element : elements){
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
     }
