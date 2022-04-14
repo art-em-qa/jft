@@ -1,33 +1,25 @@
 package ru.stqa.pft.addressbook.tests;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-import com.sun.xml.internal.ws.util.StringUtils;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.UserData;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class UserCreationTest extends TestBase{
 
-  @Test(enabled = false)
+  @Test
   public void testUserCreation() throws Exception {
-    List<UserData> before = app.getContactHelper().getContactList();
-    UserData contact = new UserData("Antonio", "Fagundes",
-            "Portugal, St.Barbara", "+0123456789", "a.fagundes@stbarbara.com",
-            "actor");
-    app.getContactHelper().createContactAndGroupIfGroupNotExist(contact);
-    List<UserData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() +1);
-
-    before.add(contact);
-    Comparator<? super UserData> byId = (n1, n2) -> Integer.compare(n1.getId(), n2.getId());
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(after, before);
-    //System.out.println(before);
-    //System.out.println(after);
+    Contacts before = app.contact().all();
+    UserData contact = new UserData().withName("Antonio").withLastname("Fagundes").
+            withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withEmail("a.fagundes@stbarbara.com").
+            withGroup("actor");
+    app.contact().createContactAndGroupIfGroupNotExist(contact);
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size() +1);
+    assertThat(after, equalTo(before.withAdded(
+            contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }

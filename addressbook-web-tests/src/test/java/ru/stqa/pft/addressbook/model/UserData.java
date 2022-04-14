@@ -4,32 +4,47 @@ import java.util.Objects;
 
 public class UserData {
 
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String address;
-    private final String workphone;
-    private final String email;
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String address;
+    private String workphone;
+    private String email;
     private String group;
 
-    public UserData(String firstname, String lastname, String address, String workphone, String email, String group) {
-        this.id = Integer.MAX_VALUE;
+    public UserData withName(String firstname) {
         this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.workphone = workphone;
-        this.email = email;
-        this.group = group;
+        return this;
     }
 
-    public UserData(int id, String firstname, String lastname, String address, String workphone, String email) {
+    public UserData withId(int id) {
         this.id = id;
-        this.firstname = firstname;
+        return this;
+    }
+
+    public UserData withLastname(String lastname) {
         this.lastname = lastname;
+        return this;
+    }
+
+    public UserData withAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public UserData withWorkphone(String workphone) {
         this.workphone = workphone;
+        return this;
+    }
+
+    public UserData withEmail(String email) {
         this.email = email;
-        this.group = null;
+        return this;
+    }
+
+    public UserData withGroup(String group) {
+        this.group = group;
+        return this;
     }
 
     public String getFirstname() {
@@ -81,4 +96,5 @@ public class UserData {
     public int hashCode() {
         return Objects.hash(firstname, lastname);
     }
+
 }
