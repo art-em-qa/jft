@@ -7,9 +7,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase{
 
@@ -56,6 +54,7 @@ public class GroupHelper extends HelperBase{
         initCreateNewGroup();
         fillGropForm(group);
         submitCreateNewGroup();
+        groupCache = null;
         returnGroupPage();
     }
 
@@ -64,6 +63,7 @@ public class GroupHelper extends HelperBase{
         initGroupModification();
         fillGropForm(group);
         submitGroupModifications();
+        groupCache = null;
         returnGroupPage();
     }
 
@@ -76,6 +76,7 @@ public class GroupHelper extends HelperBase{
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroup();
+        groupCache = null;
         returnGroupPage();
     }
 
@@ -87,7 +88,7 @@ public class GroupHelper extends HelperBase{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getGroupCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
@@ -101,15 +102,19 @@ public class GroupHelper extends HelperBase{
         }
         return groups;
     }
+    private Groups groupCache = null;
 
     public Groups all() {
-        Groups groups = new Groups();
+        if(groupCache != null){
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for(WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCache);
     }
 }

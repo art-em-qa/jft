@@ -5,16 +5,16 @@ import com.google.common.collect.ForwardingSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Contacts extends ForwardingSet<UserData> {
+public class Contacts extends ForwardingSet<ContactData> {
 
-    private Set<UserData> deligate;
+    private Set<ContactData> deligate;
 
     public Contacts(Contacts contacts){
-        this.deligate =new HashSet<UserData>(contacts.deligate);
+        this.deligate =new HashSet<ContactData>(contacts.deligate);
     }
 
     public Contacts() {
-        this.deligate = new HashSet<UserData>();
+        this.deligate = new HashSet<ContactData>();
     }
 
     @Override
@@ -22,13 +22,13 @@ public class Contacts extends ForwardingSet<UserData> {
         return deligate;
     }
 
-    public Contacts withAdded(UserData contact){
+    public Contacts withAdded(ContactData contact){
         Contacts contacts = new Contacts(this);
         contacts.add(contact);
         return contacts;
     }
 
-    public Contacts without(UserData contact){
+    public Contacts without(ContactData contact){
         Contacts contacts = new Contacts(this);
         contacts.remove(contact);
         return contacts;

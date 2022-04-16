@@ -2,7 +2,7 @@ package ru.stqa.pft.addressbook.model;
 
 import java.util.Objects;
 
-public class UserData {
+public class ContactData {
 
     private int id = Integer.MAX_VALUE;
     private String firstname;
@@ -12,37 +12,37 @@ public class UserData {
     private String email;
     private String group;
 
-    public UserData withName(String firstname) {
+    public ContactData withName(String firstname) {
         this.firstname = firstname;
         return this;
     }
 
-    public UserData withId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
         return this;
     }
 
-    public UserData withLastname(String lastname) {
+    public ContactData withLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
 
-    public UserData withAddress(String address) {
+    public ContactData withAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public UserData withWorkphone(String workphone) {
+    public ContactData withWorkphone(String workphone) {
         this.workphone = workphone;
         return this;
     }
 
-    public UserData withEmail(String email) {
+    public ContactData withEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public UserData withGroup(String group) {
+    public ContactData withGroup(String group) {
         this.group = group;
         return this;
     }
@@ -88,7 +88,7 @@ public class UserData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserData userData = (UserData) o;
+        ContactData userData = (ContactData) o;
         return id == userData.id && Objects.equals(firstname, userData.firstname) && Objects.equals(lastname, userData.lastname);
     }
 
