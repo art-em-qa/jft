@@ -156,23 +156,23 @@ public class ContactHelper extends HelperBase {
             String firstname = tag.get(2).getText();
             String address = tag.get(3).getText();
             String allEmail = tag.get(4).getText();
-            String[] phones = tag.get(5).getText().split("\n");
+            String allPhones = tag.get(5).getText();
             contactsCache.add(new ContactData().withId(id).withName(firstname).withLastname(lastname).
-                    withHomephone(phones[0]).withMobile(phones[1]).withWorkphone(phones[2]).
-                    withAddress(address).withEmail(allEmail));
+                    withAllPhones(allPhones).withAddress(address).withEmail(allEmail));
         }
         return new Contacts(contactsCache);
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationsById(contact.getId());
+        int id = contact.getId();
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String workphone = wd.findElement(By.name("work")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().withName(firstname).withLastname(lastname).withHomephone(home).
+        return new ContactData().withId(id).withName(firstname).withLastname(lastname).withHomephone(home).
                 withWorkphone(workphone).withMobile(mobile);
 
     }

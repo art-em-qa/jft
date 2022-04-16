@@ -11,11 +11,21 @@ public class ContactData {
     private String workphone;
     private String homephone;
     private String mobile;
+    private String allPhones;
     private String email;
     private String group;
 
     public ContactData withName(String firstname) {
         this.firstname = firstname;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
