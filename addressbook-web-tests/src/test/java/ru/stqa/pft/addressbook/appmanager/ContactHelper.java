@@ -32,6 +32,8 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), userData.getHomephone());
         type(By.name("mobile"), userData.getMobile());
         type(By.name("email"), userData.getEmail());
+        type(By.name("email2"), userData.getEmail2());
+        type(By.name("email3"), userData.getEmail3());
         if (creation) {
             isGroupCreatedByName(userData.getGroup());
         } else {
@@ -158,7 +160,7 @@ public class ContactHelper extends HelperBase {
             String allEmail = tag.get(4).getText();
             String allPhones = tag.get(5).getText();
             contactsCache.add(new ContactData().withId(id).withName(firstname).withLastname(lastname).
-                    withAllPhones(allPhones).withAddress(address).withEmail(allEmail));
+                    withAllPhones(allPhones).withAddress(address).withAllEmails(allEmail));
         }
         return new Contacts(contactsCache);
     }
@@ -168,12 +170,16 @@ public class ContactHelper extends HelperBase {
         int id = contact.getId();
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String workphone = wd.findElement(By.name("work")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         wd.navigate().back();
-        return new ContactData().withId(id).withName(firstname).withLastname(lastname).withHomephone(home).
-                withWorkphone(workphone).withMobile(mobile);
+        return new ContactData().withId(id).withName(firstname).withLastname(lastname).withAddress(address).withEmail(email).
+                withtEmail2(email2).withEmail3(email3).withHomephone(home).withWorkphone(workphone).withMobile(mobile);
 
     }
 
