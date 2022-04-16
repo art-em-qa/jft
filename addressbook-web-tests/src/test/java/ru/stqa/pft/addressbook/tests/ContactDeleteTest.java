@@ -15,8 +15,8 @@ public class ContactDeleteTest extends TestBase {
     public void ensurePreconditions() {
         if (app.contact().all().size() == 0) {
             app.contact().createContactAndGroupIfGroupNotExist(new ContactData().withName("Antonio").withLastname("Fagundes").
-                    withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withEmail("a.fagundes@stbarbara.com").
-                    withGroup("actor"));
+                    withAddress("Portugal, St.Barbara").withEmail("a.fagundes@stbarbara.com").withWorkphone("+0123456789").
+                    withHomephone("+112").withMobile("+79110220303").withGroup("Actor"));
         }
     }
 

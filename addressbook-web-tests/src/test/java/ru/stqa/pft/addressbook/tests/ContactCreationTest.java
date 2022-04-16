@@ -10,12 +10,12 @@ import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTest extends TestBase {
 
-    @Test(enabled = false)
+    @Test
     public void testUserCreation() throws Exception {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData().withName("Antonio").withLastname("Fagundes").
-                withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withEmail("a.fagundes@stbarbara.com").
-                withGroup("actor");
+                withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withHomephone("112").
+                withMobile("+79111120202").withEmail("a.fagundes@stbarbara.com").withGroup("actor");
         app.contact().createContactAndGroupIfGroupNotExist(contact);
         assertEquals(app.contact().count(), before.size() + 1);
         Contacts after = app.contact().all();
@@ -27,7 +27,7 @@ public class ContactCreationTest extends TestBase {
     public void testUserBadCreation() throws Exception {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData().withName("Antonio'").withLastname("Fagundes").
-                withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withEmail("a.fagundes@stbarbara.com").
+                withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withHomephone("112").withMobile("+79111120202").withEmail("a.fagundes@stbarbara.com").
                 withGroup("actor"); // name with '
         app.contact().createContactAndGroupIfGroupNotExist(contact);
         assertEquals(app.contact().count(), before.size());
