@@ -3,6 +3,8 @@ package ru.stqa.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.GroupData;
 
@@ -38,18 +40,28 @@ public class GroupDataGenerator {
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(count);
-        if(format.equals("csv")){
+        if (format.equals("csv")) {
             saveAsCsv(groups, new File(file));
-        } else if (format.equals("xml")){
+        } else if (format.equals("xml")) {
             saveAsXml(groups, new File(file));
-        }else{
+        } else if (format.equals("json")) {
+            saveAsJson(groups, new File((file)));
+        } else {
             System.out.println("Неизвестный формат" + format);
         }
 
     }
 
+    private void saveAsJson(List<GroupData> groups, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
+        writer.close();
+    }
+
     private void saveAsXml(List<GroupData> groups, File file) throws IOException {
-        XStream xStream =new XStream();
+        XStream xStream = new XStream();
         xStream.processAnnotations(GroupData.class);
         String xml = xStream.toXML(groups);
         Writer writer = new FileWriter(file);
