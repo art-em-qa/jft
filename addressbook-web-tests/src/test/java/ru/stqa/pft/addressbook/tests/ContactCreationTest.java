@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -13,9 +15,10 @@ public class ContactCreationTest extends TestBase {
     @Test
     public void testUserCreation() throws Exception {
         Contacts before = app.contact().all();
-        ContactData contact = new ContactData().withName("Antonio").withLastname("Fagundes").
-                withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withHomephone("112").
-                withMobile("+79111120202").withEmail("a.fagundes@stbarbara.com").withGroup("actor");
+        File photo = new File("src/test/resources/photo.jpeg");
+        ContactData contact = new ContactData().withName("Antonio").withLastname("Fagundes").withPhoto(photo).
+                withAddress("Portugal, St.Barbara").withMobile("+79111120202").withEmail("a.fagundes@stbarbara.com").
+                withGroup("actor");
         app.contact().createContactAndGroupIfGroupNotExist(contact);
         assertEquals(app.contact().count(), before.size() + 1);
         Contacts after = app.contact().all();
@@ -23,7 +26,7 @@ public class ContactCreationTest extends TestBase {
                 contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
-    @Test
+    @Test(enabled = false)
     public void testUserBadCreation() throws Exception {
         Contacts before = app.contact().all();
         ContactData contact = new ContactData().withName("Antonio'").withLastname("Fagundes").
@@ -34,4 +37,5 @@ public class ContactCreationTest extends TestBase {
         Contacts after = app.contact().all();
         assertThat(after, equalTo(before));
     }
+
 }
