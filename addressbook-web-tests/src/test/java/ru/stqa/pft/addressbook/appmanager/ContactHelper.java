@@ -96,6 +96,7 @@ public class ContactHelper extends HelperBase {
         stopCreateAndOpenHomePage();
     }
 
+
     public void selectContactCheckboxById(int id) {
         wd.findElement(By.cssSelector("input[id='" +id + "']")).click();
     }

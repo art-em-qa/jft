@@ -3,18 +3,21 @@
     "firstname": "FirstnameTest 0",
     "lastname": "LastnameTest 0",
     "address": "AddressTest 0",
-    "homephone": "00"
+    "homephone": "00",
+    "group": "GroupTest 0"
   },
   {
     "firstname": "FirstnameTest 1",
     "lastname": "LastnameTest 1",
     "address": "AddressTest 1",
-    "homephone": "01"
+    "homephone": "01",
+    "group": "GroupTest 1"
   },
   {
     "firstname": "FirstnameTest 2",
     "lastname": "LastnameTest 2",
     "address": "AddressTest 2",
-    "homephone": "02"
+    "homephone": "02",
+    "group": "GroupTest 2"
   }
 ]
