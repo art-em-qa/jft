@@ -32,6 +32,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("work"), userData.getWorkphone());
         type(By.name("home"), userData.getHomephone());
         type(By.name("mobile"), userData.getMobile());
+        type(By.name("phone2"), userData.getHomephone2());
         type(By.name("email"), userData.getEmail());
         type(By.name("email2"), userData.getEmail2());
         type(By.name("email3"), userData.getEmail3());
@@ -179,9 +180,11 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String workphone = wd.findElement(By.name("work")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String homephone2 = wd.findElement(By.name("phone2")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(id).withName(firstname).withLastname(lastname).withAddress(address).withEmail(email).
-                withtEmail2(email2).withEmail3(email3).withHomephone(home).withWorkphone(workphone).withMobile(mobile);
+                withtEmail2(email2).withEmail3(email3).withHomephone(home).withWorkphone(workphone).withMobile(mobile).
+                withHomephone2(homephone2);
 
     }
 

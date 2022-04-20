@@ -23,7 +23,7 @@ public class ContactAddressTests extends TestBase {
     public void testContactEmail() {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+
     }
 
 }

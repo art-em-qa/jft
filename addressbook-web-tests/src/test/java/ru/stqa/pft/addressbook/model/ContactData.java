@@ -22,6 +22,8 @@ public class ContactData {
     private String workphone;
     @Expose
     private String homephone;
+    @Expose
+    private String homephone2;
     private String mobile;
     private String allPhones;
     private String allEmails;
@@ -47,6 +49,15 @@ public class ContactData {
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getHomephone2() {
+        return homephone2;
+    }
+
+    public ContactData withHomephone2(String homephone2) {
+        this.homephone2 = homephone2;
         return this;
     }
 
