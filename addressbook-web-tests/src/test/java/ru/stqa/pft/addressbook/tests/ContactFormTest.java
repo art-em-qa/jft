@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ContactFormTest extends TestBase {
-    
+
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.contact().all().size() == 0) {
