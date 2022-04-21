@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,9 @@ public class ContactFormTest extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        if (app.contact().all().size() == 0) {
-            app.contact().createContactAndGroupIfGroupNotExist(new ContactData().withName("Antonio").withLastname("Fagundes").
+        if (app.db().contacts().size() == 0) {
+            app.contact().createContactAndGroupIfGroupNotExist(new ContactData().withPhoto(new File("src/test/resources/photo.jpeg")).
+                    withName("Antonio").withLastname("Fagundes").
                     withWorkphone("+0123456789").withHomephone("+112").withHomephone2("88005552222").withGroup("Actor").
                     withEmail("a.fagundes@stbarbara.com").withtEmail2("a.fagundes@stbarbara.pt").withEmail3("a.fagundes@sesilmustdie.pt").
                     withAddress("Portugal, St.Barbara"));

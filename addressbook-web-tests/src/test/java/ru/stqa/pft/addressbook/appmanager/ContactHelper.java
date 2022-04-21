@@ -24,7 +24,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillFormNewUser(ContactData userData, boolean creation) {
+    public void fillFormNewContact(ContactData userData, boolean creation) {
         type(By.name("firstname"), userData.getFirstname());
         type(By.name("lastname"), userData.getLastname());
         type(By.name("address"), userData.getAddress());
@@ -83,7 +83,7 @@ public class ContactHelper extends HelperBase {
             new GroupHelper(wd).create(new GroupData().withName(contact.getGroup()));
             initCreateNewUser();
         }
-        fillFormNewUser(contact, true);
+        fillFormNewContact(contact, true);
         submitCreateNewUser();
         contactsCache = null;
         stopCreateAndOpenHomePage();
@@ -91,7 +91,7 @@ public class ContactHelper extends HelperBase {
 
     public void createContact(ContactData contact) {
         initCreateNewUser();
-        fillFormNewUser(contact, true);
+        fillFormNewContact(contact, true);
         submitCreateNewUser();
         contactsCache = null;
         stopCreateAndOpenHomePage();
@@ -125,7 +125,7 @@ public class ContactHelper extends HelperBase {
 
     public void modificateContact(ContactData contact) {
         initContactModificationsById(contact.getId());
-        fillFormNewUser(contact, false);
+        fillFormNewContact(contact, false);
         submitUserModifications();
         contactsCache = null;
     }

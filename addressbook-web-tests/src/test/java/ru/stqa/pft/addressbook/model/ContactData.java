@@ -19,6 +19,7 @@ public class ContactData {
     @Column(name = "id")
     private int id = Integer.MAX_VALUE;
 
+    @Expose
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
@@ -35,6 +36,10 @@ public class ContactData {
     @Column(name = "address")
     @Type(type = "text")
     private String address;
+
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     transient private String workphone;
 
     @Expose
@@ -47,6 +52,7 @@ public class ContactData {
     @Type(type = "text")
     private String homephone2;
 
+    @Expose
     @Column(name = "mobile")
     @Type(type = "text")
     private String mobile;
@@ -54,7 +60,11 @@ public class ContactData {
     private String allPhones;
     @Transient
     private String allEmails;
-    transient private String email;
+
+    @Expose
+    @Column(name = "email")
+    @Type(type = "text")
+    private String email;
     transient private String email2;
     transient private String email3;
 
@@ -188,6 +198,19 @@ public class ContactData {
         return id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) && Objects.equals(workphone, that.workphone) && Objects.equals(homephone, that.homephone) && Objects.equals(homephone2, that.homephone2) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, address, workphone, homephone, homephone2, mobile, email);
+    }
+
     public File getPhoto() {
         return new File(photo);
     }
@@ -206,16 +229,4 @@ public class ContactData {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData userData = (ContactData) o;
-        return id == userData.id && Objects.equals(firstname, userData.firstname) && Objects.equals(lastname, userData.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
-    }
 }
