@@ -20,8 +20,8 @@ public class GroupModificationsTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
             app.group().create(new GroupData()
                     .withName("peopleTest").withHeader("humanTest").withFooter("testGroup"));
         }
@@ -29,25 +29,27 @@ public class GroupModificationsTests extends TestBase {
 
     @Test
     public void testsGroupModifications() {
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("Test1").withHeader("Test2").withFooter("Test3");
+        app.goTo().groupPage();
         app.group().modify(group);
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
     }
 
-    @Test
+    @Test(enabled = false)
     public void testsGroupBadModifications() {
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
                 .withId(modifiedGroup.getId()).withName("Test1'").withHeader("Test2").withFooter("Test3"); // name with '
+        app.goTo().groupPage();
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(before.size()));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         assertThat(after, equalTo(before));
     }
 
