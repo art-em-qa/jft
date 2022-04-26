@@ -16,7 +16,7 @@ public class ContactFormTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.db().contacts().size() == 0) {
-            app.contact().createContact(new ContactData().withPhoto(new File("src/test/resources/photo.jpeg")).
+            app.contact().create(new ContactData().withPhoto(new File("src/test/resources/photo.jpeg")).
                     withName("Antonio").withLastname("Fagundes").
                     withWorkphone("+0123456789").withHomephone("+112").withHomephone2("88005552222").
                     withEmail("a.fagundes@stbarbara.com").withtEmail2("a.fagundes@stbarbara.pt").withEmail3("a.fagundes@sesilmustdie.pt").

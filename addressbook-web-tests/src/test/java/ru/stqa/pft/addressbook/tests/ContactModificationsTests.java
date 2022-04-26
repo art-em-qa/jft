@@ -16,7 +16,7 @@ public class ContactModificationsTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.db().contacts().size() == 0) {
-            app.contact().createContact(new ContactData().withPhoto(new File("src/test/resources/photo.jpeg")).withName("Antonio").withLastname("Fagundes").
+            app.contact().create(new ContactData().withPhoto(new File("src/test/resources/photo.jpeg")).withName("Antonio").withLastname("Fagundes").
                     withAddress("Portugal, St.Barbara").withEmail("a.fagundes@stbarbara.com").withWorkphone("+0123456789").
                     withHomephone("+112").withMobile("+79110220303"));
         }
@@ -27,7 +27,7 @@ public class ContactModificationsTests extends TestBase {
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         ContactData modContact = new ContactData().withId(modifiedContact.getId()).withPhoto(new File("src/test/resources/photo.jpeg")).withName("Antonio-Maria").
-                withLastname("Fagundes").withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").
+                withLastname("Fagundes").withAddress("Portugal, St.Barbara").
                 withHomephone("+112").withMobile("+79110220303").withEmail("a.fagundes@stbarbara.com");
         app.contact().modify(modContact);
         assertEquals(app.contact().count(), before.size());
