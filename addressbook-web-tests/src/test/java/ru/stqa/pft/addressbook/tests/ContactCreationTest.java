@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,7 +43,7 @@ public class ContactCreationTest extends TestBase {
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) throws Exception {
         Contacts before = app.db().contacts();
-        app.contact().createContactAndGroupIfGroupNotExist(contact);
+        app.contact().createContact(contact);
         assertEquals(app.contact().count(), before.size() + 1);
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(
@@ -51,11 +52,12 @@ public class ContactCreationTest extends TestBase {
 
     @Test(enabled = false)
     public void testContactBadCreation() throws Exception {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         ContactData contact = new ContactData().withName("Antonio'").withLastname("Fagundes").
                 withAddress("Portugal, St.Barbara").withWorkphone("+0123456789").withHomephone("112").withMobile("+79111120202").withEmail("a.fagundes@stbarbara.com").
-                withGroup("actor"); // name with '
-        app.contact().createContactAndGroupIfGroupNotExist(contact);
+                inGroup(groups.iterator().next()); // name with '
+        app.contact().createContact(contact);
         assertEquals(app.contact().count(), before.size());
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(before));

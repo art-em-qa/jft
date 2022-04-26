@@ -24,20 +24,22 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillFormNewContact(ContactData userData, boolean creation) {
-        type(By.name("firstname"), userData.getFirstname());
-        type(By.name("lastname"), userData.getLastname());
-        type(By.name("address"), userData.getAddress());
-        attach(By.name("photo"), userData.getPhoto());
-        type(By.name("work"), userData.getWorkphone());
-        type(By.name("home"), userData.getHomephone());
-        type(By.name("mobile"), userData.getMobile());
-        type(By.name("phone2"), userData.getHomephone2());
-        type(By.name("email"), userData.getEmail());
-        type(By.name("email2"), userData.getEmail2());
-        type(By.name("email3"), userData.getEmail3());
+    public void fillFormNewContact(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("address"), contactData.getAddress());
+        attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("work"), contactData.getWorkphone());
+        type(By.name("home"), contactData.getHomephone());
+        type(By.name("mobile"), contactData.getMobile());
+        type(By.name("phone2"), contactData.getHomephone2());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
         if (creation) {
-            isGroupCreatedByName(userData.getGroup());
+            if(contactData.getGroups().size() > 0)
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -75,18 +77,6 @@ public class ContactHelper extends HelperBase {
 
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
-    }
-
-    public void createContactAndGroupIfGroupNotExist(ContactData contact) {
-        initCreateNewUser();
-        if(! isGroupCreatedByName(contact.getGroup())){
-            new GroupHelper(wd).create(new GroupData().withName(contact.getGroup()));
-            initCreateNewUser();
-        }
-        fillFormNewContact(contact, true);
-        submitCreateNewUser();
-        contactsCache = null;
-        stopCreateAndOpenHomePage();
     }
 
     public void createContact(ContactData contact) {
