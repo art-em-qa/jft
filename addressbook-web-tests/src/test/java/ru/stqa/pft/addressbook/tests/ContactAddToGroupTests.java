@@ -31,27 +31,12 @@ public class ContactAddToGroupTests extends TestBase {
         }
     }
 
-    @Test(enabled = false)
+    @Test
     public void testContactAddToGroup() {
         ContactData contact = app.db().contacts().iterator().next();
         GroupData group = app.db().groups().iterator().next();
         app.contact().addInGroup(contact, group);
         assertTrue(contact.getGroups().contains(group));
-    }
-
-    @Test
-    public void testDeleteContactFromToGroup() {
-        ContactData contact = app.db().contacts().iterator().next();
-        int contactId = contact.getId();
-        if (contact.getGroups().size() == 0) {
-            GroupData group = app.db().groups().iterator().next();
-            app.contact().openHomePage();
-            app.contact().addInGroup(contact, group);
-        }
-        ContactData contactRemove = app.db().getContactInGroup(contactId);
-        Groups group = contactRemove.getGroups();
-        app.contact().contactRemoveFromGroup(contactRemove);
-        assertFalse(contact.getGroups().contains(group));
     }
 
 }
