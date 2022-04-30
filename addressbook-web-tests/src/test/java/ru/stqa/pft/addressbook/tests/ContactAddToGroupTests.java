@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
+import org.openqa.selenium.devtools.v95.webaudio.model.ContextState;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -10,9 +10,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.*;
 
 public class ContactAddToGroupTests extends TestBase {
 
@@ -33,10 +31,19 @@ public class ContactAddToGroupTests extends TestBase {
 
     @Test
     public void testContactAddToGroup() {
-        ContactData contact = app.db().contacts().iterator().next();
+        Contacts contacts = app.db().contacts();
+        Contacts contactToAdd = new Contacts();
+        for (ContactData contactData : contacts){
+            if(contactData.getGroups().size() == 0){
+                ContactData newContact = contactData;
+                contactToAdd.add(newContact);
+            }
+        }
         GroupData group = app.db().groups().iterator().next();
+        System.out.println(contactToAdd);
+        ContactData contact = contactToAdd.iterator().next();
         app.contact().addInGroup(contact, group);
-        assertTrue(contact.getGroups().contains(group));
+        //assertTrue(contact.getGroups().contains(group));
     }
 
 }
