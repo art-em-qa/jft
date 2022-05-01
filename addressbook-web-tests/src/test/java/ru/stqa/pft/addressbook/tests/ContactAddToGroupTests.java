@@ -1,12 +1,10 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.openqa.selenium.devtools.v95.webaudio.model.ContextState;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -34,10 +32,16 @@ public class ContactAddToGroupTests extends TestBase {
     public void testContactAddToGroup() {
         Contacts contacts = app.db().contacts();
         Contacts contactToAdd = new Contacts();
+        searchContactForAddToGroup(contacts, contactToAdd);
+        GroupData group = app.db().groups().iterator().next();
+        ContactData contact = contactToAdd.iterator().next();
+        app.contact().addInGroup(contact, group);
+        assertTrue(contact.getGroups().contains(group));
+    }
+    private void searchContactForAddToGroup(Contacts contacts, Contacts contactToAdd) {
         for (ContactData contactData : contacts){
-            if(contactData.getGroups().size() == 0) {
-                ContactData contactWitoutGroup = contactData;
-                contactToAdd.add(contactWitoutGroup);
+            if(contactData.getGroups() == null) {;
+                contactToAdd.add(contactData);
                 break;
             } else {
                 ContactData contact = contactData;
@@ -49,11 +53,6 @@ public class ContactAddToGroupTests extends TestBase {
                 break;
             }
         }
-        GroupData group = app.db().groups().iterator().next();
-        System.out.println(contactToAdd);
-        ContactData contact = contactToAdd.iterator().next();
-        app.contact().addInGroup(contact, group);
-        assertTrue(contact.getGroups().contains(group));
     }
 
 }

@@ -97,6 +97,7 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[id='" +id + "']")).click();
     }
 
+
     public void delete(ContactData contact) {
         selectContactCheckboxById(contact.getId());
         deleteSelectedUsers();
