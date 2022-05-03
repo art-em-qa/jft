@@ -28,7 +28,7 @@ public class RegistrationTest extends TestBase{
         app.james().createUser(user, password);
         app.registration().start(user, email);
         //List<EMailMessage> eMailMessages = app.mail().waitForMail(2, 10000);
-        List<EMailMessage> eMailMessages = app.james().waitForMail(user, password, 60000)
+        List<EMailMessage> eMailMessages = app.james().waitForMail(user, password, 60000);
         String confiramationLink = findConfiramationLink(eMailMessages, email);
         app.registration().finish(confiramationLink, password);
         assertTrue(app.newSession().login(user, password));
