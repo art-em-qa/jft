@@ -40,7 +40,7 @@ public class ContactAddToGroupTests extends TestBase {
     }
     private void searchContactForAddToGroup(Contacts contacts, Contacts contactToAdd) {
         for (ContactData contactData : contacts){
-            if(contactData.getGroups() == null) {;
+            if(contactData.getGroups().size() == 0) {;
                 contactToAdd.add(contactData);
                 break;
             } else {
