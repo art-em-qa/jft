@@ -36,7 +36,7 @@ public class ContactAddToGroupTests extends TestBase {
         GroupData group = app.db().groups().iterator().next();
         ContactData contact = contactToAdd.iterator().next();
         app.contact().addInGroup(contact, group);
-        assertTrue(contact.getGroups().contains(group));
+        assertTrue(app.db().getContactInGroup(contact.getId()).getGroups().contains(group));
     }
     private void searchContactForAddToGroup(Contacts contacts, Contacts contactToAdd) {
         for (ContactData contactData : contacts){
