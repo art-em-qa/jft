@@ -21,7 +21,7 @@ public class ChangePasswordTest extends TestBase {
 
     @Test
     public void passwordResetTest() throws MessagingException, IOException {
-        app.registration().login(new UserData().withLogin("administrator").withPassword("root"));
+        app.registration().loginAdmin();
         UserData user = app.db().users()
                 .stream().filter((u) -> (!u.getLogin().equals("administrator")))
                 .collect(Collectors.toList()).iterator().next();

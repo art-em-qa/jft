@@ -32,11 +32,11 @@ public class RegistrationHelper extends HelperBase {
         resetPassword();
     }
 
-    public void login(UserData user) {
+    public void loginAdmin() {
         wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
-        type(By.name("username"), user.getLogin());
+        type(By.name("username"), app.getProperty("web.adminLogin"));
         click(cssSelector("input[type='submit']"));
-        type(By.name("password"), user.getPassword());
+        type(By.name("password"), app.getProperty("web.root"));
         click(cssSelector("input[type='submit']"));
     }
 
