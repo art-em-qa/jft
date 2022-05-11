@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="AllTest">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.ContactCreationTest"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactAddToGroupTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactDeleteTest"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactFormTest"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactModificationsTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactRemoveFromGroup"/>
+            <class name="ru.stqa.pft.addressbook.tests.GroupCreationTest" />
+            <class name="ru.stqa.pft.addressbook.tests.GroupModificationsTests" />
+            <class name="ru.stqa.pft.addressbook.tests.GroupDeleteTest"/>
+        </classes>
+    </test>
+</suite>

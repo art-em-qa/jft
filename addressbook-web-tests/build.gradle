@@ -4,6 +4,10 @@ repositories {
     mavenCentral()
 }
 
+test{
+    useTestNG()
+}
+
 dependencies {
     implementation 'org.testng:testng:7.5'
     implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
@@ -43,5 +47,17 @@ task testContacts (type: Test) {
     }
     if(project.hasProperty('veifyUI')){
         systemProperty 'veifyUI', "${veifyUI}"
+    }
+
+    task testAllTest(type: Test) {
+        useTestNG {
+            suites 'src/test/resources/testng-allTest.xml'
+        }
+        if (project.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+        if (project.hasProperty('target')) {
+            systemProperty 'target', "${target}"
+        }
     }
 }
