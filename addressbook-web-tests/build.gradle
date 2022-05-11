@@ -20,7 +20,7 @@ dependencies {
     implementation 'org.bedework:hibernate-core:5.2.5.1FinalBwPatched'
 }
 
-task testAllTest(type: Test) {
+task allTest(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-allTest.xml'
     }
