@@ -20,7 +20,37 @@ dependencies {
     implementation 'org.bedework:hibernate-core:5.2.5.1FinalBwPatched'
 }
 
-task allTest(type: Test) {
+task testGroups(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('veifyUI')) {
+        systemProperty 'veifyUI', "${veifyUI}"
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('veifyUI')) {
+        systemProperty 'veifyUI', "${veifyUI}"
+    }
+}
+
+task testAllTest(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-allTests.xml'
     }
@@ -29,5 +59,8 @@ task allTest(type: Test) {
     }
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('veifyUI')) {
+        systemProperty 'veifyUI', "${veifyUI}"
     }
 }
