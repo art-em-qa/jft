@@ -22,7 +22,7 @@ dependencies {
 
 task allTest(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-allTest.xml'
+        suites 'src/test/resources/testng-allTests.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
